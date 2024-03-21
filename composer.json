@@ -1,0 +1,25 @@
+{
+    "name": "xoscan/zincsearch-es",
+    "description": "PHP Client for Zincsearch Reference Elasticsearch API",
+    "type": "library",
+    "keywords": ["search","client", "elasticsearch","zincsearch","zincsearch-es"],
+    "autoload": {
+        "psr-4": {
+            "ZincsearchEs\\": "src/ZincsearchEs/"
+        }
+    },
+    "authors": [
+        {
+            "name": "xoscan",
+            "email": "490181369@qq.com"
+        }
+    ],
+    "require": {
+        "php": "^7.0",
+        "ext-json": ">=1.3.7",
+        "guzzlehttp/ringphp": "~1.0",
+        "psr/log": "~1.0"
+    },
+    "license": "Apache-2.0"
+    
+}
