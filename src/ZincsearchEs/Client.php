@@ -89,7 +89,7 @@ class Client
     /** @var callable */
     protected $endpoints;
 
-    /** @var  NamespaceBuilderInterface[] */
+    /** @var  array */
     protected $registeredNamespaces = [];
 
     /**
@@ -97,10 +97,11 @@ class Client
      *
      * @param Transport|null $transport
      * @param callable $endpoint
-     * @param AbstractNamespace[] $registeredNamespaces
+     * @param array $registeredNamespaces
      */
     public function __construct($transport, callable $endpoint, array $registeredNamespaces)
     {
+
         $this->transport = $transport;
         $this->endpoints = $endpoint;
         // $this->indices   = new IndicesNamespace($transport, $endpoint);
@@ -1617,7 +1618,7 @@ class Client
     {
        
         $host = $this->registeredNamespaces[0];
-        // var_dump($endpoint->getParams());
+        var_dump($this->registeredNamespaces);
 
         $uriPrefix = "";
         if($endpoint instanceof \ZincsearchEs\Endpoints\Search){
@@ -1639,11 +1640,11 @@ class Client
         ];
         
         if($this->registeredNamespaces[1] != ""){
-            $data["headers"][] = 'authorization: Basic '.$this->registeredNamespaces[1];
+            $data["headers"][] = 'authorization: Basic '.implode("",$this->registeredNamespaces[1]);
             // array_push($data[''])
         }
         
-        print_r($data);
+        // var_dump($data);
         return $this->opCurl(
             $data["http_method"],
             "http://".$data["uri"],

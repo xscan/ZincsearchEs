@@ -20,6 +20,10 @@ use ZincsearchEs\Common\Exceptions\RuntimeException;
  * @license  http://www.apache.org/licenses/LICENSE-2.0 Apache2
  * @link     http://elastic.co
   */
+ini_set('display_errors', 1);
+ini_set('error_reporting', E_ALL);
+ini_set('log_errors', 0);
+ini_set('error_log', './php_errors.log');
 class ClientBuilder
 {      
    /** @var callable */
@@ -36,7 +40,7 @@ class ClientBuilder
     /** @var array */
     private $connectionParams;
 
-    /**@var string */
+    /** @var string */
     private $apiKey;
     /**
      * @return ClientBuilder
@@ -109,7 +113,7 @@ class ClientBuilder
     }
 
        /**
-     * @param array $apiKey
+     * @param string $apiKey
      * @return $this
      */
     public function setApiKey($apiKey)
@@ -180,7 +184,13 @@ class ClientBuilder
             };
         }
 
-        $registeredNamespaces = [$this->hosts[0],$this->apiKey];
+        $host = $this->hosts[0];
+        $registeredNamespaces = [
+            $host,$this->apiKey
+        ];
+        // array_push($registeredNamespaces,$host);
+        // array_push($registeredNamespaces,$this->apiKey);
+        
         $this->transport = null;
         // $connections = $this->buildConnectionsFromHosts($this->hosts);
 
